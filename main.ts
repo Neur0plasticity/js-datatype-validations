@@ -27,7 +27,7 @@ const _number = [(v => typeof v === "number"),
         }
 ];
 const _lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","y","z"];
-const _upperCase = lowerCase.map(v => v.toUpperCase());
+const _upperCase = _lowerCase.map(v => v.toUpperCase());
 const _string = [(v => typeof v === "string"),
         {
             isEmpty:      v => v.length === 0,
@@ -35,7 +35,7 @@ const _string = [(v => typeof v === "string"),
             isAlpha:      v => [..._lowerCase,..._upperCase].includes(v),
         }
 ];
-const _object = [(v => typeof v === "object"),
+const _object = [(v => !Array.isArray(v) && typeof v === "object"),
         {
             isEmpty:      v => Object.keys(v).length === 0,
             isNotEmpty:   v => Object.keys(v).length !== 0             
@@ -69,7 +69,7 @@ const _class = [(v => typeof v === "function"),
 const _undefined = [];
 const _null = [];
 
-export default Object.freeze({
+export const DType = Object.freeze({
     _boolean:       _dType(_boolean[0]  ,_boolean[1]),
     _number:        _dType(_number[0]   ,_number[1]),
     _string:        _dType(_string[0]   ,_string[1]),
